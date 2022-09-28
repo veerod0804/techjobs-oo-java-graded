@@ -93,4 +93,32 @@ public class Job {
     public int getId() {
         return id;
     }
+
+    // adding custom toString method below
+   @Override
+   public String toString() {
+    if (getName() == "") {
+        setName("Data not available");
+    }
+    if (getEmployer().getValue() == "") {
+        employer.setValue("Data not available");
+    }
+    if (getLocation().getValue() == "") {
+        location.setValue("Data not available");
+    }
+    if (getPositionType().getValue() == "") {
+        positionType.setValue("Data not available");
+    }
+    if (getCoreCompetency().getValue() == "") {
+        coreCompetency.setValue("Data not available");
+    }
+       return  "\n" +
+               "ID: " + getId() + '\n' +
+               "Name: " + getName() + '\n' +
+               "Employer: " + getEmployer() + '\n' +
+               "Location: " + getLocation() + '\n' +
+               "Position Type: " + getPositionType() + '\n' +
+               "Core Competency: " + getCoreCompetency() + '\n';
+
+   }
 }

@@ -42,4 +42,41 @@ public class JobTest {
         Job jobTwo = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
         assertFalse(jobOne.equals(jobTwo));
     }
+
+    @Test
+    public void testToStringStartsAndEndsWithNewLine() {
+        Job jobOne = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        char firstChar = jobOne.toString().charAt(0);
+        char lastChar = jobOne.toString().charAt(jobOne.toString().length() - 1);
+        assertEquals(firstChar, '\n');
+        assertEquals(lastChar, '\n');
+    }
+
+    @Test
+    public void testToStringContainsCorrectLabelsAndData() {
+        Job jobOne = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        String expected = "\n" +
+                "ID: " + jobOne.getId() + '\n' +
+                "Name: " + jobOne.getName() + '\n' +
+                "Employer: " + jobOne.getEmployer() + '\n' +
+                "Location: " + jobOne.getLocation() + '\n' +
+                "Position Type: " + jobOne.getPositionType() + '\n' +
+                "Core Competency: " + jobOne.getCoreCompetency() + '\n';
+        String actual = jobOne.toString();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testToStringHandlesEmptyField() {
+        Job jobOne = new Job("", new Employer(""), new Location(""), new PositionType(""), new CoreCompetency(""));
+        String expected = "\n" +
+                "ID: 1" + '\n' +
+                "Name: Data not available" + '\n' +
+                "Employer: Data not available" + '\n' +
+                "Location: Data not available" + '\n' +
+                "Position Type: Data not available" + '\n' +
+                "Core Competency: Data not available" + '\n';
+        String actual = jobOne.toString();
+        assertEquals(expected, actual);
+    }
 }
